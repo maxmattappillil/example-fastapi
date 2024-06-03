@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: pulling git repo
-        uses: actions/checkout@v2
-      - name: say hi to sanjeev
-        run: echo "hello sanjeev"
+        uses: actions/checkout@v4
+      - name: Install python version 3.11.3
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11.3"
+      - name: update pip
+        run: python -m pip install --upgrade pip
+      - name: install all dependencies
+        run: pip install -r requirements.txt
