@@ -1,0 +1,32 @@
+services:
+  api:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - 8000:8000
+    # volumes:
+    #   - ./:/usr/src/app:ro
+    env_file:
+      - ./.env
+    # environment:
+    #   - DATABASE_HOSTNAME=postgres
+    #   - DATABASE_PORT=5432
+    #   - DATABASE_PASSWORD=queryboi*()00
+    #   - DATABASE_NAME=fastapi_db
+    #   - DATABASE_USERNAME=postgres
+    #   - SECRET_KEY=c7aaacc8a5a0877157e2c050bb232f7416a516e4f51045d0cba896f1653cedd1
+    #   - ALGORITHM=HS256
+    #   - ACCESS_TOKEN_EXPIRE_MINUTES=60
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+volumes:
+  postgres-db:
